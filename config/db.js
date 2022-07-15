@@ -7,11 +7,7 @@ const pool = mysql.createPool({
     password: process.env.PASSWORD,
     port: process.env.PORT,
     database: process.env.DATABASE,
-    ssl: {
-        ca: fs.readFileSync(path.join(__dirname, process.env.SSL)),
-        rejectUnauthorized: true,
-        require: true,
-    }
+    ssl: { ca: fs.readFileSync(process.env.SSL) }
 });
 
 global.db = pool;
