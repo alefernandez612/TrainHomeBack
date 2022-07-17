@@ -1,13 +1,13 @@
 const mysql = require('mysql2');
 const fs = require('fs');
-const serverCa = [fs.readFileSync("process.env.SSL", "utf8")];
+const serverCa = [fs.readFileSync(process.env.DB_SSL, "utf8")];
 
 const pool = mysql.createPool({
-    host: process.env.HOSTNAME,
-    user: process.env.USERNAME,
-    password: process.env.PASSWORD,
-    port: process.env.PORT,
-    database: process.env.DATABASE,
+    host: process.env.DB_HOSTNAME,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    database: process.env.DB_DATABASE,
     ssl: {
         rejectUnauthorized: true,
         ca: serverCa
