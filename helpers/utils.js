@@ -14,7 +14,7 @@ function executeQuery(sql, values = []) {
 }
 
 /**
- * @description Esta función recibe como parámetros una consulta junto a los valores para filtrarla y devuelve el resultado de una consulta con una única fila. Usado principalmente en métodos GET de filtros con valores únicos en la tabla.
+ * @description Esta función recibe como parámetros una consulta junto a los valores para filtrarla y devuelve el resultado de una consulta con una única fila o nulo si no hay resultados. Usado principalmente en métodos GET de filtros con valores únicos en la tabla.
  * @param {string} sql Recibe como parámetro un string.
  * @param {Array} values Recibe como parámetros un Array
  * @returns {Promise} Devuelve una Promise con un objeto.
