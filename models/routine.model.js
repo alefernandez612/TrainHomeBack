@@ -32,7 +32,7 @@ const getByDuration = () => {
  * @returns Una matriz de objetos.
  */
 const getByObjetive = (objetive) => {
-    return executeQuery('select id, name, (select name from objetive where objetive.id = routine.objetive_id) as objetive from routine where objetive_id = (select id from objetive where name like ?)', [objetive]);
+    return executeQuery('select id, name, (select name from objetive where objetive.id = routine.objetive_id) as objetive from routine where objetive_id = (select id from objetive where name like ?)', [`%${objetive}%`]);
 };
 
 /**
@@ -42,7 +42,7 @@ const getByObjetive = (objetive) => {
  * @returns Una matriz de objetos.
  */
 const getByMuscle = (muscle) => {
-    return executeQuery('select id, name, (select name from muscle where muscle.id = routine.muscle_id) as muscle from routine where muscle_id = (select id from muscle where name like ?)', [muscle]);
+    return executeQuery('select id, name, (select name from muscle where muscle.id = routine.muscle_id) as muscle from routine where muscle_id = (select id from muscle where name like ?)', [`%${muscle}%`]);
 };
 
 /**
