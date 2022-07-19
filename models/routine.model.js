@@ -1,29 +1,23 @@
 const { executeQuery, executeQueryOne } = require('../helpers/utils');
 
 /**
- * Devuelve el resultado de la función executeQuery, que es una promesa.
- * @returns Una matriz de objetos.
- */
-const getAll = () => {
-    return executeQuery('select * from routine');
-};
-
-/**
- * Esta función devuelve una promesa que se resuelve en una sola fila de la base de datos.
- * @param id - la identificación de la rutina para obtener
- * @returns el resultado de la función executeQueryOne.
- */
-const getById = (id) => {
-    return executeQueryOne('select * from routine where id = ?', [id]);
-};
-
-/**
  * Obtenga todas las rutinas y, para cada rutina, obtenga la duración total de todos los ejercicios de
  * esa rutina.
  * @returns Una matriz de objetos.
  */
-const getByDuration = () => {
+const getAll = () => {
     return executeQuery('select r.*, sec_to_time(count(er.routine_id)*40 + sum(e.duration)) as duration from routine r join exercise_routine er on r.id = er.routine_id join exercise e on er.exercise_id = e.id group by er.routine_id');
+};
+
+/**
+ * Obtenga una rutina por ID y también obtenga la duración total de la rutina sumando la duración de
+ * cada ejercicio en la rutina.
+ * @param id - El id de la rutina a obtener.
+ * @returns Un objeto con las siguientes propiedades:
+ * id, nombre, duración, created_at, updated_at
+ */
+const getById = (id) => {
+    return executeQueryOne('select r.*, sec_to_time(count(er.routine_id)*40 + sum(e.duration)) as duration from routine r join exercise_routine er on r.id = er.routine_id join exercise e on er.exercise_id = e.id group by er.routine_id having (r.id = ?)', [id]);
 };
 
 /**
@@ -89,7 +83,6 @@ module.exports = {
     getByObjetive,
     getByMuscle,
     getByDifficulty,
-    getByDuration,
     create,
     update,
     deleteById
