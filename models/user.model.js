@@ -51,7 +51,7 @@ const create = ({ username, password, email, name, lastname, birthday, address, 
 
 /**
  * Actualiza la información de un usuario en la base de datos.
- * @param id - 1
+ * @param id - El id del usuario.
  * @returns El resultado de la consulta.
  */
 const update = (id, { password, email, name, lastname, birthday, address, phone, gender, height, weight, avatar, objetive_id }) => {
