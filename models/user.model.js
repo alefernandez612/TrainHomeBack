@@ -30,6 +30,16 @@ const getByEmail = (email) => {
 };
 
 /**
+ * GetByUsername devuelve el resultado de ejecutar la consulta 'select * from user where username = ?'
+ * con el parámetro nombre de usuario.
+ * @param username - el nombre de usuario del usuario que desea obtener
+ * @returns El resultado de la consulta.
+ */
+const getByUsername = (username) => {
+    return executeQueryOne('select * from user where username = ?', [username]);
+};
+
+/**
  * Toma un objeto con las propiedades nombre de usuario, contraseña, correo electrónico, nombre,
  * apellido, cumpleaños, dirección, teléfono, sexo, altura, peso, avatar y los inserta en la base de
  * datos.
@@ -61,6 +71,7 @@ module.exports = {
     getAll,
     getById,
     getByEmail,
+    getByUsername,
     create,
     update,
     deleteById
