@@ -57,7 +57,6 @@ typings/
 # dotenv environment variables file
 /environment
 .env
-/crt
 /.vscode
 
 # next.js build output
