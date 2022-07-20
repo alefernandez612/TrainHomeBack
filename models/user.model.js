@@ -20,6 +20,26 @@ const getById = (id) => {
 };
 
 /**
+ * GetByEmail devuelve el resultado de ejecutar la consulta 'select * from user where email = ?' con el
+ * parámetro email.
+ * @param email - la dirección de correo electrónico del usuario
+ * @returns El resultado de la consulta.
+ */
+const getByEmail = (email) => {
+    return executeQueryOne('select * from user where email = ?', [email]);
+};
+
+/**
+ * GetByUsername devuelve el resultado de ejecutar la consulta 'select * from user where username = ?'
+ * con el parámetro nombre de usuario.
+ * @param username - el nombre de usuario del usuario que desea obtener
+ * @returns El resultado de la consulta.
+ */
+const getByUsername = (username) => {
+    return executeQueryOne('select * from user where username = ?', [username]);
+};
+
+/**
  * Toma un objeto con las propiedades nombre de usuario, contraseña, correo electrónico, nombre,
  * apellido, cumpleaños, dirección, teléfono, sexo, altura, peso, avatar y los inserta en la base de
  * datos.
@@ -31,7 +51,7 @@ const create = ({ username, password, email, name, lastname, birthday, address, 
 
 /**
  * Actualiza la información de un usuario en la base de datos.
- * @param id - 1
+ * @param id - El id del usuario.
  * @returns El resultado de la consulta.
  */
 const update = (id, { password, email, name, lastname, birthday, address, phone, gender, height, weight, avatar, objetive_id }) => {
@@ -50,6 +70,8 @@ const deleteById = (id) => {
 module.exports = {
     getAll,
     getById,
+    getByEmail,
+    getByUsername,
     create,
     update,
     deleteById

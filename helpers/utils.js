@@ -1,3 +1,6 @@
+const dayjs = require('dayjs');
+const jwt = require('jsonwebtoken');
+
 /**
  * @description Esta función recibe como parámetros una consulta junto a los valores para filtrarla y devuelve el resultado de una consulta.
  * @param {string} sql Recibe como parámetro un string.
@@ -29,7 +32,16 @@ function executeQueryOne(sql, values) {
     });
 }
 
+function createToken(user) {
+    const tokenUser = {
+        userId: user.id,
+        expDate: dayjs().add(7, 'days').unix()
+    };
+    return jwt.sign(tokenUser, process.env.API_TOKEN);
+}
+
 module.exports = {
     executeQuery,
-    executeQueryOne
+    executeQueryOne,
+    createToken
 };

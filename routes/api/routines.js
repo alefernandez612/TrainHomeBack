@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Routine = require('../../models/routine.model');
+const { checkAdmin } = require('../../helpers/middlewares');
 
 router.get('/', async (req, res) => {
     try {
@@ -60,7 +61,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:routineId', (req, res) => {
+router.put('/:routineId', checkAdmin, (req, res) => {
     const { routineId } = req.params;
     Routine.update(routineId, req.body)
         .then(() => {
@@ -70,7 +71,7 @@ router.put('/:routineId', (req, res) => {
         });
 });
 
-router.delete('/:routineId', (req, res) => {
+router.delete('/:routineId', checkAdmin, (req, res) => {
     const { routineId } = req.params;
     Routine.deleteById(routineId)
         .then(() => res.json({ success: 'La rutina se ha eliminado correctamente' }))
