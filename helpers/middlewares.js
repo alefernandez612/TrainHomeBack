@@ -27,6 +27,14 @@ const checkToken = async (req, res, next) => {
     next();
 };
 
+const checkAdmin = (req, res, next) => {
+    if (req.user.role !== 'admin') {
+        return res.json({ error: 'No eres admin.' });
+    }
+    next();
+};
+
 module.exports = {
-    checkToken
+    checkToken,
+    checkAdmin
 };
