@@ -25,7 +25,7 @@ router
         }
     })
 
-    .post('/registro',
+    .post('/register',
 
         body('username')
             .custom(value => User.getByUsername(value).then(user => {
