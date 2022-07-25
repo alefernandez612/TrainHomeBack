@@ -39,13 +39,13 @@ router
         body('username')
             .custom(value => User.getByUsername(value).then(user => {
                 if (user) {
-                    return res.json({ error: 'El nombre de usuario ya existe.' });
+                    return Promise.reject('El nombre de usuario ya existe.');
                 }
             })),
         body('email')
             .custom(value => User.getByEmail(value).then(email => {
                 if (email) {
-                    return res.json({ error: 'El email ya existe.' });
+                    return Promise.reject('El email ya existe.');
                 }
             })),
 
