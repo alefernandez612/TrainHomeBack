@@ -9,6 +9,6 @@ const { checkToken } = require('../helpers/middlewares');
 router.use('/users', usersRouter);
 router.use('/routines', checkToken, routinesRouter);
 router.use('/exercises', checkToken, exercisesRouter);
-router.use('/objetives', checkToken, objetivesRouter);
+router.use('/objetives', objetivesRouter);
 
 module.exports = router;
