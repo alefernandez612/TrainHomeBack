@@ -40,6 +40,15 @@ const getByUsername = (username) => {
 };
 
 /**
+ * Devuelve una promesa que se resuelve en una matriz de objetos, cada objeto contiene una sola
+ * propiedad, género, que es una cadena.
+ * @returns Una matriz de objetos.
+ */
+const getGender = () => {
+    return executeQuery('select gender from user group by gender');
+};
+
+/**
  * Toma un objeto con las propiedades nombre de usuario, contraseña, correo electrónico, nombre,
  * apellido, cumpleaños, dirección, teléfono, sexo, altura, peso, avatar y los inserta en la base de
  * datos.
@@ -72,6 +81,7 @@ module.exports = {
     getById,
     getByEmail,
     getByUsername,
+    getGender,
     create,
     update,
     deleteById

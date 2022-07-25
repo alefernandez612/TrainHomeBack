@@ -15,6 +15,15 @@ router
         }
     })
 
+    .get('/gender', async (req, res) => {
+        try {
+            const gender = await User.getGender();
+            res.json(gender);
+        } catch (err) {
+            res.json({ error: err.message });
+        }
+    })
+
     .get('/:id', checkToken, async (req, res) => {
         try {
             const { id } = req.params;
