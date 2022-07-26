@@ -37,7 +37,7 @@ router
         }
     })
 
-    .post('/register', upload.single('imagen'),
+    .post('/register', upload.single('avatar'),
 
         body('username')
             .custom(value => User.getByUsername(value).then(user => {
@@ -57,10 +57,11 @@ router
             if (!errors.isEmpty()) {
                 return res.json(errors.array());
             }
-
+            console.log(req.file);
             const extension = '.' + req.file.mimetype.split('/')[1];
             const newAvatar = req.file.filename + extension;
             const newPath = req.file.path + extension;
+            console.log(newPath);
 
             fs.renameSync(req.file.path, newPath);
             req.body.avatar = newAvatar;
