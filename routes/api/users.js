@@ -1,5 +1,8 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
+const multer = require('multer');
+const upload = multer({ dest: 'public/images' });
+const fs = require('fs');
 const { body, validationResult } = require('express-validator');
 const { createToken } = require('../../helpers/utils');
 const { checkToken, checkAdmin } = require('../../helpers/middlewares');
@@ -34,7 +37,7 @@ router
         }
     })
 
-    .post('/register',
+    .post('/register', upload.single('imagen'),
 
         body('username')
             .custom(value => User.getByUsername(value).then(user => {
@@ -54,6 +57,14 @@ router
             if (!errors.isEmpty()) {
                 return res.json(errors.array());
             }
+
+            const extension = '.' + req.file.mimetype.split('/')[1];
+            const newAvatar = req.file.filename + extension;
+            const newPath = req.file.path + extension;
+
+            fs.renameSync(req.file.path, newPath);
+            req.body.avatar = newAvatar;
+
             try {
                 req.body.password = bcrypt.hashSync(req.body.password, 10);
                 const { insertId } = await User.create(req.body);
