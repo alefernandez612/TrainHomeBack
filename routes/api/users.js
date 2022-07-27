@@ -36,6 +36,9 @@ router
             res.json({ error: err.message });
         }
     })
+    .get('/user', checkToken, async (req, res) => {
+        res.json(req.user);
+    })
 
     .get('/:id', checkToken, async (req, res) => {
         try {
