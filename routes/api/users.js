@@ -27,6 +27,16 @@ router
         }
     })
 
+    .get('/history/:id', checkToken, async (req, res) => {
+        try {
+            const { id } = req.params;
+            const user = await User.getHistoryById(id);
+            res.json(user);
+        } catch (err) {
+            res.json({ error: err.message });
+        }
+    })
+
     .get('/:id', checkToken, async (req, res) => {
         try {
             const { id } = req.params;
