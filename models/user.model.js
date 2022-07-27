@@ -29,6 +29,7 @@ const getByEmail = (email) => {
     return executeQueryOne('select * from user where email = ?', [email]);
 };
 
+
 /**
  * GetByUsername devuelve el resultado de ejecutar la consulta 'select * from user where username = ?'
  * con el parámetro nombre de usuario.
@@ -37,6 +38,15 @@ const getByEmail = (email) => {
  */
 const getByUsername = (username) => {
     return executeQueryOne('select * from user where username = ?', [username]);
+};
+
+/**
+ * Obtener el historial de un usuario por su id.
+ * @param id - la identificación del usuario
+ * @returns Una matriz de objetos.
+ */
+const getHistoryById = (id) => {
+    return executeQuery('select (select name from routine where routine.id = history.routine_id) as routine, date from history where user_id = ?', [id]);
 };
 
 /**
@@ -81,6 +91,7 @@ module.exports = {
     getById,
     getByEmail,
     getByUsername,
+    getHistoryById,
     getGender,
     create,
     update,
