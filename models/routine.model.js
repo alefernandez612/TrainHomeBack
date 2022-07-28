@@ -49,6 +49,16 @@ const getByDifficulty = (difficulty) => {
 };
 
 /**
+ * Devuelve una promesa que se resuelve en una matriz de objetos, cada uno de los cuales contiene una
+ * sola propiedad, route_id.
+ * @param id - id_usuario
+ * @returns Una matriz de objetos.
+ */
+const getRoutineByUserId = (id) => {
+    return executeQuery('select routine_id from history where user_id = ?', [id]);
+};
+
+/**
  * Esta función crea una nueva rutina en la base de datos.
  * @returns El resultado de la consulta.
  */
@@ -83,6 +93,7 @@ module.exports = {
     getByObjetive,
     getByMuscle,
     getByDifficulty,
+    getRoutineByUserId,
     create,
     update,
     deleteById
