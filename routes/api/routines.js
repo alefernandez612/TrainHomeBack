@@ -52,6 +52,16 @@ router
         }
     })
 
+    .get('/routine/:id', async (req, res) => {
+        try {
+            const { id } = req.params;
+            const routines = await Routine.getRoutineByUserId(id);
+            res.json(routines);
+        } catch (err) {
+            res.json({ error: err.message });
+        }
+    })
+
     .post('/', async (req, res) => {
         try {
             const { insertId } = await Routine.create(req.body);
